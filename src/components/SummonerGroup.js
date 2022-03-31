@@ -1,13 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import { useWeb3React } from '@web3-react/core'
-import { useGraphSummonerIDs } from '../services/graph/hooks'
 
 const SummonerGroup = () => {
-  const {  account, chainId, library } = useWeb3React() 
-
-  const ids = useGraphSummonerIDs(account)
-  console.log('IDS', ids);
   return (
     <div className="table-responsive">
       <table className="table align-middle">
