@@ -5,17 +5,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Web3ReactProvider } from '@web3-react/core'
 import { ethers } from "ethers";
-
+import { Provider } from 'react-redux'
+import {createStore} from 'redux'
+import summonerDataReducers from './reducers/summonerDataReducers.js'
 
 const getLibrary = (provider) => {
   return new ethers.providers.Web3Provider(provider)
 }
+const store = createStore(summonerDataReducers)
 
-ReactDOM.render(  
+ReactDOM.render(
     <React.StrictMode>
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <App />
-      </Web3ReactProvider>
+      <Provider store={store}>
+        <Web3ReactProvider getLibrary={getLibrary}>
+          <App />
+        </Web3ReactProvider>
+      </Provider>
     </React.StrictMode>
   ,
   document.getElementById('root')
