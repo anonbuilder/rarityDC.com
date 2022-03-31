@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 import { useGraphSummonerIDs } from './services/graph/hooks'
 import useRarityLibrary from './hooks/useRarityLibrary'
 import useIsWindowVisible from './hooks/useIsWindowVisible'
-
+import { useDispatch } from 'react-redux'
 import Summoners from './pages/Summoners'
 import NotFound from './pages/404'
 import Header from './components/Header.js';
@@ -29,6 +29,8 @@ const App = () => {
 
   const windowVisible = useIsWindowVisible()
 
+  const dispatch = useDispatch()
+
   const fetchSummonersData = useCallback(
     async (ids) => {
         const chunks = chunkArrayByNumber(ids, 70)
@@ -44,7 +46,8 @@ const App = () => {
         }
         const summoners_full_data = [].concat(...full_data)
         console.log(summoners_full_data);
-      
+        //dispatch(updateSummoners(summoners_full_data))
+        //dispatch(setLoading(false))
     },
     [summonersFull]
   )
