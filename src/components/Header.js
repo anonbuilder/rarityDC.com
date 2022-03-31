@@ -41,7 +41,7 @@ const Header =  () => {
     <header>
       <nav className="navbar navbar-expand-lg navbar-light" style = {{ justifyContent: 'center'}}>
         <div className="container-fluid">
-            <div class="navbar-brand">  
+            <div className="navbar-brand">  
               <img src = {logo} style ={{width: '15%'}}></img>
             </div>    
             {active
