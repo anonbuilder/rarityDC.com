@@ -8,11 +8,14 @@ import { ethers } from "ethers";
 import { Provider } from 'react-redux'
 import {createStore} from 'redux'
 import summonerDataReducers from './reducers/summonerDataReducers.js'
+import { configureStore } from '@reduxjs/toolkit'
 
 const getLibrary = (provider) => {
   return new ethers.providers.Web3Provider(provider)
 }
-const store = createStore(summonerDataReducers)
+
+const store = configureStore({  reducer: {summoners:summonerDataReducers},})
+
 
 ReactDOM.render(
     <React.StrictMode>

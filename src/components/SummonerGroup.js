@@ -1,7 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
+import { shallowEqual, useSelector} from 'react-redux'
 
 const SummonerGroup = () => {
+
+  const summonersFull = useSelector (state => state.summoners.data  )
+  console.log(summonersFull)
+
   return (
     <div className="table-responsive">
       <table className="table align-middle">

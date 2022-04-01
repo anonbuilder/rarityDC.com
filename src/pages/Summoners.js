@@ -4,8 +4,9 @@ import SummonerGroup from '../components/SummonerGroup';
 import BoxInfo from '../components/BoxInfo.js';
 import NavSummoner from '../components/NavSummoner.js';
 
+
 function Summoners() {
- 
+  console.log('test')
   return (
     <>     
       <div className = {'container'}>

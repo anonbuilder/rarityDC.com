@@ -5,6 +5,7 @@ import { useGraphSummonerIDs } from './services/graph/hooks'
 import useRarityLibrary from './hooks/useRarityLibrary'
 import useIsWindowVisible from './hooks/useIsWindowVisible'
 import { useDispatch } from 'react-redux'
+import { updateSummoners, setLoading } from './reducers/summonerDataReducers.js'
 import Summoners from './pages/Summoners'
 import NotFound from './pages/404'
 import Header from './components/Header.js';
@@ -44,10 +45,10 @@ const App = () => {
             const chunkResponse = await Promise.all(fChunk)
             full_data = full_data.concat(...chunkResponse)
         }
-        const summoners_full_data = [].concat(...full_data)
-        console.log(summoners_full_data);
-        //dispatch(updateSummoners(summoners_full_data))
-        //dispatch(setLoading(false))
+        const summoners_full_data = [].concat(...full_data)     
+        dispatch(updateSummoners(summoners_full_data))
+        dispatch(setLoading(false))
+
     },
     [summonersFull]
   )
