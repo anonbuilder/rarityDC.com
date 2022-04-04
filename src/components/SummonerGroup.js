@@ -1,52 +1,31 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { shallowEqual, useSelector} from 'react-redux'
-
+import SummonerCard from './SummonerCard.js';
+import { getSummonerClass ,getSummonerImg} from '../functions/getSummonerClass'
+import { CardGroup ,Row,Col} from 'react-bootstrap';
 const SummonerGroup = () => {
 
   const summonersFull = useSelector (state => state.summoners.data  )
   console.log(summonersFull)
 
   return (
-    <div className="table-responsive">
-      <table className="table align-middle">
-        <thead>
-          <tr>
-            <th></th>
-            <th>#</th>
-            <th>ID</th>
-            <th>Class</th>
-            <th>Level</th>
-            <th>XP</th>
-            <th>Daycare</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="checkbox" id="cbox1" value="first_checkbox"/></td>
-            {Array.from({ length: 7 }).map((_, index) => (
-              <td key={index}>Table cell {index}</td>
-            ))}
-          </tr>
-          <tr>
-            <td><input type="checkbox" id="cbox1" value="first_checkbox"/></td>
-            {Array.from({ length: 7 }).map((_, index) => (
-              <td key={index}>Table cell {index}</td>
-            ))}
-          </tr>
-          <tr>
-            <td><input type="checkbox" id="cbox1" value="first_checkbox"/></td>
-            {Array.from({ length: 7 }).map((_, index) => (
-              <td key={index}>Table cell {index}</td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <Row xs={1} md={5} >
+      {summonersFull.map((summoner,index) =>
+        <Col>
+          <SummonerCard 
+            summonerId ={summoner.id}
+            summonerClass ={getSummonerClass(summoner.base._class)}
+            summonerImg ={getSummonerImg(summoner.base._class)}
+            summonerLevel ={summoner.base._level}
+            summonerXp ={summoner.base._xp}
+            summonerDaycare ={summoner.misc.daycare_days_paid}            
+            />
+        </Col>              
+        )
+      }
+    </Row>
   );
 };
 
 export default SummonerGroup;
-
- 
