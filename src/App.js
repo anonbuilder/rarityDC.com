@@ -10,6 +10,7 @@ import Summoners from './pages/Summoners'
 import NotFound from './pages/404'
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
+import { Toaster } from 'react-hot-toast'
 
 const chunkArrayByNumber = (items, elements) => {
   const res = []
@@ -68,6 +69,7 @@ const App = () => {
               <Route path='*' element={<NotFound/>}/>
           </Routes>
       </BrowserRouter>
+      <Toaster/>
       <Footer/>
     </> 
   )
