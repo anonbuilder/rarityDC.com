@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Footer =  () => {
   return (
     <footer>
-            <div className="flex flex-row justify-center text-center" style={{ textAlign: 'center' }}>
+            <div className="" style={{ textAlign: 'center' }}>
                 {`Created by`}:{' '}
                 <a target="_blank" rel="noreferrer" href="https://twitter.com/AndreCronjeTech">
                     <b>
@@ -14,11 +14,11 @@ const Footer =  () => {
                 {`and built by`}:{' '}
                 <a target="_blank" rel="noreferrer" href="https://twitter.com/">
                     <b>
-                        <span>Mr  T. </span>
+                        <span>Martin</span>
                     </b>
                 </a>{' '}
             </div>
-            <div className="flex flex-row justify-center" style={{ textAlign: 'center' }}>
+            <div className="" style={{ textAlign: 'center' }}>
                 <span>
                     {`Donations`}:{' '}
                     <a

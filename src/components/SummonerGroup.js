@@ -21,9 +21,8 @@ const SummonerGroup = () => {
     const timer = setInterval(() => {
         setCurrentTime(Date.now())
     }, 1000)
-
     return () => clearInterval(timer)
-}, [account, library])
+  }, [account, library])
 
   return (
     <Row xs={1} md={4} >
