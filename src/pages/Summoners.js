@@ -3,19 +3,19 @@ import React from 'react'
 import SummonerGroup from '../components/SummonerGroup';
 import BoxInfo from '../components/BoxInfo.js';
 import NavSummoner from '../components/NavSummoner.js';
-
+import { Container } from 'react-bootstrap';
 
 function Summoners() {
   console.log('test')
   return (
     <>     
-      <div className = {'container'}>
+      <Container>
         <div>
           <BoxInfo />
           <NavSummoner/>
           <SummonerGroup />
         </div>
-      </div>
+      </Container>
     </>
   );
 }

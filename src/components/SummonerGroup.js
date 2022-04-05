@@ -10,7 +10,7 @@ const SummonerGroup = () => {
   console.log(summonersFull)
 
   return (
-    <Row xs={1} md={5} >
+    <Row xs={1} md={4} >
       {summonersFull.map((summoner,index) =>
         <Col>
           <SummonerCard 
