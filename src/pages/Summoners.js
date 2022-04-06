@@ -1,19 +1,34 @@
 import '../App.css';
-import React from 'react'
+import {React,useState} from 'react'
 import SummonerGroup from '../components/SummonerGroup';
 import BoxInfo from '../components/BoxInfo.js';
 import NavSummoner from '../components/NavSummoner.js';
 import { Container } from 'react-bootstrap';
+import DaycareModal from '../components/modals/DaycareModal.js'
 
 function Summoners() {
-  console.log('test')
+ 
+  const [daycareSummoners, setDaycareSummoners] = useState([])
+
+  const [daycareModalShow, setdaycareModalShow] = useState(false)
+
+  function dayCareFunc(summoners) {
+    setdaycareModalShow(true)
+    setDaycareSummoners(summoners)
+  }
+
   return (
-    <>     
+    <>
+      <DaycareModal 
+        show={daycareModalShow} 
+        handleClose={() => setdaycareModalShow(false)} 
+        summoners ={daycareSummoners} 
+      />   
       <Container>
         <div>
           <BoxInfo />
-          <NavSummoner/>
-          <SummonerGroup />
+          <NavSummoner dayCareFunc={dayCareFunc}/>
+          <SummonerGroup dayCareFunc={dayCareFunc}/>
         </div>
       </Container>
     </>

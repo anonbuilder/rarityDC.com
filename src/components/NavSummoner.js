@@ -1,15 +1,20 @@
 import '../App.css';
 import React from 'react'
-function NavSummoner() {
- 
+import { useSelector} from 'react-redux'
+import { Card ,ListGroup,Button } from 'react-bootstrap';
+
+function NavSummoner({dayCareFunc}) {
+
+  const summonersFull = useSelector (state => state.summoners.data  )
+
   return (
-    <div>
-        <button type="button" className = "btn btn-outline-secondary" >Approve Contract</button>
+    <div className="content-button-summoners">       
+        <Button variant="secondary" size="lg" >Approve Contract</Button>  
         {' '}    
-        <button type="button" className = "btn btn-outline-secondary" >Daycare All</button>
+        <Button variant="secondary" size="lg" onClick={() => dayCareFunc(summonersFull)}>Daycare All</Button>        
         {' '}
-        <button type="button" className = "btn btn-outline-secondary" >Daycare Selected</button>
-        {' '}       
+        {/* <button type="button" className = "btn btn-outline-secondary" >Daycare Selected</button>
+        {' '}        */}
     </div>
   );
 }
