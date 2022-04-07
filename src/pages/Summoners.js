@@ -2,7 +2,7 @@ import '../App.css';
 import {React,useState} from 'react'
 import SummonerGroup from '../components/SummonerGroup';
 import BoxInfo from '../components/BoxInfo.js';
-import NavSummoner from '../components/NavSummoner.js';
+
 import { Container } from 'react-bootstrap';
 import DaycareModal from '../components/modals/DaycareModal.js'
 
@@ -26,8 +26,7 @@ function Summoners() {
       />   
       <Container>
         <div>
-          <BoxInfo />
-          <NavSummoner dayCareFunc={dayCareFunc}/>
+          <BoxInfo />          
           <SummonerGroup dayCareFunc={dayCareFunc}/>
         </div>
       </Container>
