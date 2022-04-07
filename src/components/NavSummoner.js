@@ -8,9 +8,7 @@ function NavSummoner({dayCareFunc}) {
   const summonersFull = useSelector (state => state.summoners.data  )
 
   return (
-    <div className="content-button-summoners">       
-        <Button variant="secondary" size="lg" >Approve Contract</Button>  
-        {' '}    
+    <div className="content-button-summoners">
         <Button variant="secondary" size="lg" onClick={() => dayCareFunc(summonersFull)}>Daycare All</Button>        
         {' '}
         {/* <button type="button" className = "btn btn-outline-secondary" >Daycare Selected</button>
