@@ -38,7 +38,7 @@ const SummonerCard = ({summoner,dayCareFunc,time}) => {
                 <ListGroup.Item >
                     {summoner.base._log * 1000 > time ? (                      
                         <Button 
-                          disabled="true"
+                          disabled={true}
                           variant="secondary" 
                           //style={{"font-size":"0.7rem","padding": "0.595rem 0.75rem"}}
                           > {secondsRender((summoner.base._log * 1000 - time) / 1000)}
