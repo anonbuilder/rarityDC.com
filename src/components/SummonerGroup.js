@@ -5,13 +5,17 @@ import SummonerCard from './SummonerCard.js';
 import { CardGroup ,Row,Col} from 'react-bootstrap';
 import { useWeb3React } from '@web3-react/core'
 import DaycareModal from '../components/modals/DaycareModal.js'
+import NavSummoner from '../components/NavSummoner.js';
 
 const SummonerGroup = ({dayCareFunc}) => {
 
   const { library, account } = useWeb3React()
 
   const summonersFull = useSelector (state => state.summoners.data  )
-  console.log(summonersFull)
+
+  const loading = useSelector(state => state.summoners.loading)
+
+  //console.log(summonersFull)
 
   const [time, setCurrentTime] = useState(Date.now())
 
@@ -24,19 +28,46 @@ const SummonerGroup = ({dayCareFunc}) => {
   }, [account, library])
 
   return (
-    <>    
-      <Row xs={1} md={4} >
-        {summonersFull.map((summoner,index) =>
-          <Col>
-            <SummonerCard 
-              summoner ={summoner}           
-              dayCareFunc ={dayCareFunc}
-              time= {time}
-              />
-          </Col>              
-          )
-        }
-      </Row>
+    <>{!account? 
+        ( <div className ="text-align-center border-radius messenger-style" >
+            <h1>YOUR WALLET IS NOT CONNECTED</h1>
+          </div>
+        ): (
+          <>
+            {loading?(
+                <div className ="text-align-center border-radius messenger-style" >
+                  <h1>LOADING...</h1>
+                </div>
+              ):(<>
+                { summonersFull.length > 0? (
+                    <>
+                      <NavSummoner dayCareFunc={dayCareFunc}/>
+                      <Row xs={1} md={4} >
+                        {summonersFull.map((summoner,index) =>
+                          <Col key={index}>
+                            <SummonerCard 
+                              key={index}
+                              summoner ={summoner}           
+                              dayCareFunc ={dayCareFunc}
+                              time= {time}
+                              />
+                          </Col>              
+                          )
+                        }
+                      </Row>
+                    </>
+                  ):(
+                    <div className ="text-align-center border-radius messenger-style" >
+                      <h1>NO SUMMONERS</h1>
+                    </div>                  
+                  )
+                }
+                </>
+              )
+            }
+          </>
+        )
+      } 
     </>
   );
 };
