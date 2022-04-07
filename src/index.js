@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -17,7 +17,11 @@ const getLibrary = (provider) => {
 const store = configureStore({  reducer: {summoners:summonerDataReducers},})
 
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+
+root.render(
     <React.StrictMode>
       <Provider store={store}>
         <Web3ReactProvider getLibrary={getLibrary}>
@@ -25,8 +29,6 @@ ReactDOM.render(
         </Web3ReactProvider>
       </Provider>
     </React.StrictMode>
-  ,
-  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
