@@ -10,6 +10,11 @@ import monkImg from '../img/summoners/monk.png';
 import paladinImg from '../img/summoners/paladin.png';
 import rangerImg from '../img/summoners/ranger.png';
 
+import druidImg from '../img/summoners/druid.png';
+import rogueImg from '../img/summoners/rogue.png';
+
+import sorcererImg from '../img/summoners/sorcerer.png';
+
 import emptyImg from '../img/summoners/empty.png';
 
 export function getSummonerClass(classId){
@@ -46,7 +51,7 @@ export function getSummonerImg(classId){
     } else if (classId === 3) {
         return clericImg;
     } else if (classId === 4) {
-        return emptyImg;
+        return druidImg;
     } else if (classId === 5) {
         return fighterImg;
     } else if (classId === 6) {
@@ -56,9 +61,9 @@ export function getSummonerImg(classId){
     } else if (classId === 8) {
         return rangerImg;
     } else if (classId === 9) {
-        return emptyImg;
+        return rogueImg;
     } else if (classId === 10) {
-        return emptyImg;
+        return sorcererImg;
     } else if (classId === 11) {
         return wizardImg;
     }  
