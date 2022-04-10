@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
 import { utils } from 'ethers'
-import { useRarityDaycareContract } from './useContract'
+import { useRarityDaycarePlanetContract } from './useContract'
 
-export default function useRarityDaycare()  {
-    const daycare = useRarityDaycareContract()
+export default function useRarityDaycarePlanet()  {
+    const daycare = useRarityDaycarePlanetContract()
 
     const daysPaid = useCallback(
         async (id) => {
@@ -24,7 +24,7 @@ export default function useRarityDaycare()  {
             return new Promise(async (resolve, reject) => {
                 try {
                     const daysRegistry = Array(ids.length).fill(days, 0, ids.length)
-                    const fee = utils.parseUnits((0.08 * ids.length * days).toString(), 'ether')
+                    const fee = utils.parseUnits((0.07 * ids.length * days).toString(), 'ether')
                     const tx = await daycare?.registerDaycare(ids, daysRegistry, { value: fee })
                     await tx.wait()
                     resolve()
@@ -36,5 +36,19 @@ export default function useRarityDaycare()  {
         [daycare]
     )
 
-    return { daysPaid, registerDaycare }
+    const canRegister = useCallback(
+        async (address) => {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    const canRegister = await daycare?.canRegister(address)
+                    resolve(canRegister)
+                } catch (e) {
+                    reject(e)
+                }
+            })
+        },
+        [daycare]
+    )
+
+    return { daysPaid, registerDaycare,canRegister }
 }

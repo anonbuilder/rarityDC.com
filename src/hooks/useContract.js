@@ -4,12 +4,15 @@ import { useWeb3React } from '@web3-react/core'
 import {
     RARITY_LIB,
     RARITY_ADDRESS,
-    RARITY_DAYCARE_ADDRESS
+    RARITY_DAYCARE_ADDRESS,
+    RARITY_DAYCARE_PLANET_ADDRESS
 } from '../constants/constants.js'
 
 import RARITY_ABI from '../constants/abis/rarity.json'
 import RARITY_LIB_ABI from '../constants/abis/rarity_library.json'
 import RARITY_DAYCARE_ABI from '../constants/abis/daycare.json'
+import RARITY_DAYCARE_PLANET_ABI from '../constants/abis/daycare_planet.json'
+
 
 export function useContract(address, ABI, withSignerIfPossible = true){
     const { library, account } = useWeb3React()
@@ -38,4 +41,9 @@ export function useRarityContract(): Contract | null {
 export function useRarityDaycareContract(): Contract | null {
     const { chainId } = useWeb3React()
     return useContract(chainId ? RARITY_DAYCARE_ADDRESS : undefined, RARITY_DAYCARE_ABI)
+}
+
+export function useRarityDaycarePlanetContract(): Contract | null {
+    const { chainId } = useWeb3React()
+    return useContract(chainId ? RARITY_DAYCARE_PLANET_ADDRESS : undefined, RARITY_DAYCARE_PLANET_ABI)
 }
