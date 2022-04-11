@@ -77,7 +77,7 @@ export default function useRarityLibrary(){
                                     total_points: parseInt(value.skills.total_points.toString()),
                                 },
                                 misc: {
-                                    daycare_days_paid: parseInt(value.misc.daycare_days_paid.toString()),
+                                    daycare_days_paid: parseInt((value.misc.daycare_days_paid + value.misc.daycare_days_paid_planet).toString()),
                                 },
                             }
                         })
