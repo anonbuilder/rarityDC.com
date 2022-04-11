@@ -43,7 +43,8 @@ const Main = () => {
             const chunkResponse = await Promise.all(fChunk)
             full_data = full_data.concat(...chunkResponse)
         }
-        const summoners_full_data = [].concat(...full_data)     
+        const summoners_full_data = [].concat(...full_data)
+        console.log(summoners_full_data)
         dispatch(updateSummoners(summoners_full_data))
         dispatch(setLoading(false))
 

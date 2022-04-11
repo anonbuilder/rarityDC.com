@@ -1,7 +1,8 @@
 import {useState, useEffect,useCallback} from 'react'
 import useRarity from '../../hooks/useRarity.js'
 import useRarityDaycare from '../../hooks/useRarityDaycare.js'
-import { RARITY_ADVENTURE_TIME } from '../../constants/constants.js'
+import useRarityDaycarePlanet from '../../hooks/useRarityDaycarePlanet.js'
+import { RARITY_ADVENTURE_TIME,RARITY_DAYCARE_PLANET_ADDRESS} from '../../constants/constants.js'
 import {Modal,Button} from 'react-bootstrap'
 import { sendToast } from '../../functions/toast'
 import { useWeb3React } from '@web3-react/core'
@@ -12,15 +13,26 @@ const DaycareModal = ({show,handleClose,summoners}) => {
 
     const [days, setDays] = useState(0)
 
+    const [isPlanetContract, setIsPlanetContract] = useState(false)
+
     const { registerDaycare } = useRarityDaycare()
+
+    const { registerDaycarePlanet, canRegister } = useRarityDaycarePlanet()    
 
     const { isApprovedForAll, setApprovalForAll } = useRarity()
 
     const [adventureTimeApproval, setAdventureTimeApproval] = useState(false)
 
     const fetch_approval = useCallback(async () => {
-        const approved = await isApprovedForAll(account, RARITY_ADVENTURE_TIME)
+
+        const planetContract =  await canRegister(account)
+
+        const approved = planetContract? await isApprovedForAll(account, RARITY_DAYCARE_PLANET_ADDRESS) : await isApprovedForAll(account, RARITY_ADVENTURE_TIME) 
         setAdventureTimeApproval(approved)
+        setIsPlanetContract(planetContract)
+        console.log(approved);
+        console.log(planetContract);
+
     }, [account, isApprovedForAll])
 
     useEffect(() => {
@@ -42,12 +54,12 @@ const DaycareModal = ({show,handleClose,summoners}) => {
           </Modal.Header>
           <Modal.Body>        
             <p>The daily care is a community run system to take care of your summoners</p>
-            <p>The service has a fee of 0.08 FTM for each summoner for each day.</p>
+            <p>The service has a fee of 0.08 FTM (0.07 FTM With Planet Token) for each summoner for each day.</p>
             <p>How many days do you want to register your summoner/s?</p>
             {adventureTimeApproval ? (
                     <>
                         <div>
-                            <input
+                            <input  className =  "border-radius color-black"
                                 type="number"                             
                                 onChange={(v) => setDays(parseInt(v.target.value))}
                             />
@@ -61,29 +73,52 @@ const DaycareModal = ({show,handleClose,summoners}) => {
           <Modal.Footer>
             {adventureTimeApproval ? (
                     <>               
-                        <div>                            
-                            <Button                                    
-                                onClick={async () =>
-                                    await sendToast(
-                                        registerDaycare(
-                                            summoners.map((s) => s.id),
-                                            days
-                                        ),
-                                        `Registering summoner`
-                                    )
-                                }
-                            >register summoner
-                            </Button>                        
+                        <div>
+                            {isPlanetContract? (
+                                    <Button 
+                                        variant="secondary"                                    
+                                        onClick={async () =>
+                                            await sendToast(
+                                                registerDaycarePlanet(
+                                                    summoners.map((s) => s.id),
+                                                    days
+                                                ),
+                                                `Registering summoner`
+                                            )
+                                        }
+                                        >Register summoner
+                                    </Button> 
+
+                                ):(
+                                    <Button 
+                                        variant="secondary"                                    
+                                        onClick={async () =>
+                                            await sendToast(
+                                                registerDaycare(
+                                                    summoners.map((s) => s.id),
+                                                    days
+                                                ),
+                                                `Registering summoner`
+                                            )
+                                        }
+                                        >Register summoner
+                                    </Button> 
+                                )
+
+                            }
+                                         
                         </div>
                     </>
                 ) : (
                     <div>
-                        <Button onClick={() =>
+                        <Button 
+                            variant="secondary" 
+                            onClick={() =>
                                 sendToast(
                                     setApprovalForAll(RARITY_ADVENTURE_TIME),
                                     `Approving adventure time contract`
                                 ).then(() => setAdventureTimeApproval(true))
-                            }>approve adventure time                            
+                            }>Approve adventure time                            
                         </Button>                       
                     </div>
                 )
