@@ -45,7 +45,7 @@ const Header =  () => {
               <img src = {logo} style ={{width: '15%'}}></img>
             </div>    
             {active
-              ? <div style ={{padding:'10px', border:'2px solid #ffff'}}>
+              ? <div className ="border-radius" style ={{padding:'10px'}}>
                   <h4>{ account.substring(0,6) + `...` + account.substring(38)}
                   </h4>
                 </div>
