@@ -19,7 +19,7 @@ export default function useRarityDaycarePlanet()  {
         [daycare]
     )
 
-    const registerDaycare = useCallback(
+    const registerDaycarePlanet = useCallback(
         async (ids, days) => {
             return new Promise(async (resolve, reject) => {
                 try {
@@ -50,5 +50,5 @@ export default function useRarityDaycarePlanet()  {
         [daycare]
     )
 
-    return { daysPaid, registerDaycare,canRegister }
+    return { daysPaid, registerDaycarePlanet,canRegister }
 }
