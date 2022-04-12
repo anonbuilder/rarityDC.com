@@ -15,11 +15,14 @@ export const summonerDataReducers = createSlice({
     },
     setLoading: (state, action) => {
       state.loading = action.payload  
-    },   
+    },
+    statusSummoners:(state, action) => {
+      state.status = action.payload  
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { updateSummoners, setLoading } = summonerDataReducers.actions
+export const { updateSummoners, setLoading,statusSummoners } = summonerDataReducers.actions
 
 export default summonerDataReducers.reducer

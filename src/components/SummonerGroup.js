@@ -2,9 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {React,useState,  useEffect} from 'react'
 import { useSelector} from 'react-redux'
 import SummonerCard from './SummonerCard.js';
-import { CardGroup ,Row,Col} from 'react-bootstrap';
+import { Row,Col} from 'react-bootstrap';
 import { useWeb3React } from '@web3-react/core'
-import DaycareModal from '../components/modals/DaycareModal.js'
 import NavSummoner from '../components/NavSummoner.js';
 
 const SummonerGroup = ({dayCareFunc}) => {

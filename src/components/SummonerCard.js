@@ -1,10 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {React,useState} from 'react';
+import {React} from 'react';
 import { Card ,ListGroup,Button } from 'react-bootstrap';
 import useRarity from '../hooks/useRarity'
 import { sendToast } from '../functions/toast'
 import { getSummonerClass ,getSummonerImg} from '../functions/getSummonerClass'
-
+import { useDispatch ,useSelector} from 'react-redux'
+import { statusSummoners} from '../reducers/summonerDataReducers.js'
 function secondsRender(d){
   d = Number(d)
   let h = Math.floor(d / 3600)
@@ -29,8 +30,11 @@ function calcXPForNextLevel(level){
 
 const SummonerCard = ({summoner,dayCareFunc,time}) => {
   
-  const { adventure,level_up } = useRarity()
+  const { adventure,level_up } = useRarity()  
 
+  const status = useSelector(state => state.summoners.status)
+  const dispatch = useDispatch()
+ 
   return ( 
     <Card className="card-daycare">    
         <Card.Body>   
@@ -43,7 +47,7 @@ const SummonerCard = ({summoner,dayCareFunc,time}) => {
                             <Button
                                 variant="secondary" 
                                 onClick={async () =>
-                                  await sendToast(level_up(summoner.id), `LEVEL-UP Summoner`)
+                                  await sendToast(level_up(summoner.id), `LEVEL-UP Summoner`).then(() => dispatch(statusSummoners(!status)))
                                 }
                                 className=""
                             >
@@ -65,7 +69,7 @@ const SummonerCard = ({summoner,dayCareFunc,time}) => {
                       ) : (
                         <Button
                           variant="secondary" 
-                          onClick={async () =>await sendToast(adventure(summoner.id),`Sending summoner`)
+                          onClick={async () =>await sendToast(adventure(summoner.id),`Sending summoner`).then(() => dispatch(statusSummoners(!status)))
                                   }>Go To adventure
                         </Button>
                     )}                

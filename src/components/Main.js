@@ -4,7 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 import { useGraphSummonerIDs } from '../services/graph/hooks'
 import useRarityLibrary from '../hooks/useRarityLibrary'
 import useIsWindowVisible from '../hooks/useIsWindowVisible'
-import { useDispatch } from 'react-redux'
+import { useDispatch ,useSelector} from 'react-redux'
 import { updateSummoners, setLoading } from '../reducers/summonerDataReducers.js'
 import Summoners from '../pages/Summoners'
 import NotFound from '../pages/404'
@@ -29,6 +29,8 @@ const Main = () => {
   const windowVisible = useIsWindowVisible()
 
   const dispatch = useDispatch()
+  
+  const status = useSelector(state => state.summoners.status)
 
   const fetchSummonersData = useCallback(
     async (ids) => {
@@ -47,7 +49,6 @@ const Main = () => {
         console.log(summoners_full_data)
         dispatch(updateSummoners(summoners_full_data))
         dispatch(setLoading(false))
-
     },
     [summonersFull]
   )
@@ -55,7 +56,7 @@ const Main = () => {
   useEffect(() => {
       if (!ids || !library || !chainId || !account || !windowVisible) return
       fetchSummonersData(ids)
-  }, [ids, windowVisible, fetchSummonersData, library, chainId, account])
+  }, [ids, windowVisible, fetchSummonersData, library, chainId, account,status])
 
   
   return ( 

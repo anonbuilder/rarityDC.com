@@ -2,11 +2,12 @@ import {useState, useEffect,useCallback} from 'react'
 import useRarity from '../../hooks/useRarity.js'
 import useRarityDaycare from '../../hooks/useRarityDaycare.js'
 import useRarityDaycarePlanet from '../../hooks/useRarityDaycarePlanet.js'
-import { RARITY_ADVENTURE_TIME,RARITY_DAYCARE_PLANET_ADDRESS} from '../../constants/constants.js'
+import { RARITY_ADVENTURE_TIME} from '../../constants/constants.js'
 import {Modal,Button} from 'react-bootstrap'
 import { sendToast } from '../../functions/toast'
 import { useWeb3React } from '@web3-react/core'
-
+import { useDispatch ,useSelector} from 'react-redux'
+import { statusSummoners} from '../../reducers/summonerDataReducers.js'
 const DaycareModal = ({show,handleClose,summoners}) => {
 
     const { account } = useWeb3React()
@@ -22,6 +23,10 @@ const DaycareModal = ({show,handleClose,summoners}) => {
     const { isApprovedForAll, setApprovalForAll } = useRarity()
 
     const [adventureTimeApproval, setAdventureTimeApproval] = useState(false)
+
+    const status = useSelector(state => state.summoners.status)
+
+    const dispatch = useDispatch()
 
     const fetch_approval = useCallback(async () => {
 
@@ -82,7 +87,7 @@ const DaycareModal = ({show,handleClose,summoners}) => {
                                                     days
                                                 ),
                                                 `Registering summoner`
-                                            )
+                                            ).then(() => dispatch(statusSummoners(!status)))
                                         }
                                         >Register summoner
                                     </Button> 
@@ -97,7 +102,7 @@ const DaycareModal = ({show,handleClose,summoners}) => {
                                                     days
                                                 ),
                                                 `Registering summoner`
-                                            )
+                                            ).then(() => dispatch(statusSummoners(!status)))
                                         }
                                         >Register summoner
                                     </Button> 
