@@ -27,11 +27,9 @@ const DaycareModal = ({show,handleClose,summoners}) => {
 
         const planetContract =  await canRegister(account)
 
-        const approved = planetContract? await isApprovedForAll(account, RARITY_DAYCARE_PLANET_ADDRESS) : await isApprovedForAll(account, RARITY_ADVENTURE_TIME) 
+        const approved = await isApprovedForAll(account, RARITY_ADVENTURE_TIME) 
         setAdventureTimeApproval(approved)
         setIsPlanetContract(planetContract)
-        console.log(approved);
-        console.log(planetContract);
 
     }, [account, isApprovedForAll])
 
