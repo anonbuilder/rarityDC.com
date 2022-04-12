@@ -7,9 +7,6 @@ import { injected } from "./connectors/connectors.js"
 const Header =  () => {
 
   const { active, account, activate, deactivate, error } = useWeb3React()
-  
-  const test = useWeb3React()
-  console.log(test)
  
   async function connect() {
     try {

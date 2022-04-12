@@ -46,7 +46,7 @@ const Main = () => {
             full_data = full_data.concat(...chunkResponse)
         }
         const summoners_full_data = [].concat(...full_data)
-        console.log(summoners_full_data)
+       
         dispatch(updateSummoners(summoners_full_data))
         dispatch(setLoading(false))
     },
