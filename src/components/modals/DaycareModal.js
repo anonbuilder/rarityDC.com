@@ -52,7 +52,7 @@ const DaycareModal = ({show,handleClose,summoners}) => {
           </Modal.Header>
           <Modal.Body>        
             <p>The daily care is a community run system to take care of your summoners</p>
-            <p>The service has a fee of 0.08 FTM (0.07 FTM With Planet Token) for each summoner for each day.</p>
+            <p>The service has a fee of 0.08 FTM (0.07 FTM With Dark Plannet) for each summoner for each day.</p>
             <p>How many days do you want to register your summoner/s?</p>
             {adventureTimeApproval ? (
                     <>
