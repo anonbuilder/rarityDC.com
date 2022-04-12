@@ -19,11 +19,17 @@ function secondsRender(d){
       return mDisplay + sDisplay
   }
 }
-
+function calcXPForNextLevel(level){
+  let xp = level * 1000
+  for (let i = 1; i < level; i++) {
+      xp += i * 1000
+  }
+  return xp
+}
 
 const SummonerCard = ({summoner,dayCareFunc,time}) => {
   
-  const { adventure } = useRarity()
+  const { adventure,level_up } = useRarity()
 
   return ( 
     <Card className="card-daycare">    
@@ -32,7 +38,20 @@ const SummonerCard = ({summoner,dayCareFunc,time}) => {
           <Card.Title>{getSummonerClass(summoner.base._class)}</Card.Title>                 
             <ListGroup  variant="flush" className="card-body-daycare" >
                 <ListGroup.Item >ID: {summoner.id}</ListGroup.Item>  
-                <ListGroup.Item >LEVEL: {summoner.base._level}</ListGroup.Item>
+                <ListGroup.Item >LEVEL: {summoner.base._level} 
+                  {summoner.base._xp >= calcXPForNextLevel(summoner.base._level) && (
+                            <Button
+                                variant="secondary" 
+                                onClick={async () =>
+                                  await sendToast(level_up(summoner.id), `LEVEL-UP Summoner`)
+                                }
+                                className=""
+                            >
+                              {`level-up`}
+                            </Button>
+
+                  )}
+                </ListGroup.Item>
                 <ListGroup.Item >XP: {summoner.base._xp}</ListGroup.Item>
                 <ListGroup.Item >DAYCARE: {summoner.misc.daycare_days_paid}</ListGroup.Item>
                 <ListGroup.Item >
