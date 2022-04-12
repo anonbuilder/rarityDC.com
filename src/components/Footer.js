@@ -11,26 +11,16 @@ const Footer =  () => {
                     <span>@AndreCronjeTech</span>
                     </b>
                 </a>{'  '}
-                {`and built by`}:{' '}
-                <a target="_blank" rel="noreferrer" href="https://twitter.com/">
+                {`and built by`}:{' '} <a target="_blank" rel="noreferrer" href="https://twitter.com/_martin_dev_">
                     <b>
-                        <span>Martin</span>
+                        <span>@_martin_dev_</span>
                     </b>
-                </a>{' '}
-            </div>
-            <div className="" style={{ textAlign: 'center' }}>
-                <span>
-                    {`Donations`}:{' '}
-                    <a
-                        target="_blank"
-                        rel="noreferrer"
-                        href="https://ftmscan.com/address/0x2D22557D6a1b28Fa078fd8264b107A292AF878a4"
-                    >
-                        <b>
-                            <span>{'0x2D22557D6a1b28Fa078fd8264b107A292AF878a4'}</span>
-                        </b>
-                    </a>
-                </span>
+                </a>
+                {' and '} <a target="_blank" rel="noreferrer" href="https://twitter.com/anonbuilderok">
+                    <b>
+                        <span>@anonbuilderok</span>
+                    </b>
+                </a>
             </div>
     </footer> 
 
