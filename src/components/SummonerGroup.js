@@ -40,7 +40,7 @@ const SummonerGroup = ({dayCareFunc}) => {
               ):(<>
                 { summonersFull.length > 0? (
                     <>
-                      <NavSummoner dayCareFunc={dayCareFunc}/>
+                      <NavSummoner dayCareFunc={dayCareFunc} time ={time}/>
                       <Row xs={1} md={4} >
                         {summonersFull.map((summoner,index) =>
                           <Col key={index}>
