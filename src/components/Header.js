@@ -1,4 +1,4 @@
-import React from 'react'
+import {useEffect,useCallback} from 'react'
 import { useWeb3React } from '@web3-react/core'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import logo from '../img/raritydc-logo.png'
@@ -8,16 +8,17 @@ const Header =  () => {
 
   const { active, account, activate, deactivate, error } = useWeb3React()
  
-  async function connect() {
+  const connect = useCallback(async () => {
     try {
       await activate(injected)
+      localStorage.setItem('previouslyConnected',true)
     } catch (ex) {
       console.log(ex)
     }
   
-  }
+  },[activate])
 
-  async function disconnect() {
+  const disconnect = async() => {
     try {
       deactivate()
     } catch (ex) {
@@ -25,7 +26,7 @@ const Header =  () => {
     }
   }
 
-  function correctChainId () {
+  const correctChainId = () => {
     if(error){
       if(error.name === 'UnsupportedChainIdError' ) return 'You are on the wrong network'; 
       else return <button className ="btn btn-secondary" onClick={connect} color="secondary" >Connect wallet</button>;
@@ -33,6 +34,12 @@ const Header =  () => {
     else return <button className ="btn btn-secondary" onClick={connect} color="secondary" >Connect wallet</button>;
    
   }
+
+  useEffect(()=>{
+    if(localStorage.getItem('previouslyConnected') === 'true')
+      connect()
+
+  },[connect])
 
   return (
     <header>
